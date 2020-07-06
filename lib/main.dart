@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/screens/mainScreen.dart';
+import 'package:tennis_event/screens/game/courtSchedule.dart';
 import 'package:tennis_event/utilities/constants.dart';
 
 void main() {
@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
           headline2: TextStyle(fontSize: 20.0, fontStyle: FontStyle.normal),
         ),
       ),
-      home: MainScreen(),
-      //home: UserRanking(),
+//      home: MainScreen(),
+      home: CourtSchedule(),
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
 //      initialRoute: '/',

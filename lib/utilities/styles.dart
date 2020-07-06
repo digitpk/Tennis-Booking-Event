@@ -61,3 +61,10 @@ const kCardHeading = TextStyle(
   fontFamily: 'Roboto',
   fontWeight: FontWeight.w500,
 );
+
+const kCourtScheduleCardTile = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Roboto',
+  fontStyle: FontStyle.normal,
+  fontWeight: FontWeight.w800,
+);
