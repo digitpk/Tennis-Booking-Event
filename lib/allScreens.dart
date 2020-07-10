@@ -8,7 +8,6 @@ import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/screens/game/newGame.dart';
 import 'package:tennis_event/screens/game/tennisCourt.dart';
 import 'package:tennis_event/screens/mainScreen.dart';
-import 'package:tennis_event/screens/settings.dart';
 import 'package:tennis_event/screens/user/players.dart';
 import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/screens/user/userGames.dart';
@@ -17,6 +16,8 @@ import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
+
+import 'chat/mainChat.dart';
 
 // ignore: must_be_immutable
 class AllScreens extends StatelessWidget {
@@ -46,13 +47,13 @@ class AllScreens extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   RaisedButton(
-                    child: Text("Settings"),
+                    child: Text("Chat Home"),
                     elevation: 5.0,
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Settings(),
+                          builder: (context) => MyChatapp(),
                         ),
                       );
                     },
@@ -190,7 +191,7 @@ class AllScreens extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => FrenchOpenDraw(),
+                          builder: (context) => TournamentDrawgame(),
                         ),
                       );
                     },

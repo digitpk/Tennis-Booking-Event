@@ -15,7 +15,6 @@ class _SplashScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     image = Image.asset(

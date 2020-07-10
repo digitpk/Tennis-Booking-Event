@@ -13,7 +13,7 @@ class UserGamesCard extends StatelessWidget {
               radius: 15,
               backgroundColor: Colors.transparent,
               backgroundImage: AssetImage(
-                'assets/images/racket_icon.png',
+                'assets/icons/racket_icon.png',
               ),
             ),
             title: Text(
@@ -32,8 +32,12 @@ class UserGamesCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.timer,
+                    CircleAvatar(
+                      child: Image.asset(
+                        'assets/icons/clock_icon.png',
+                      ),
+                      backgroundColor: Colors.transparent,
+                      radius: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -46,10 +50,17 @@ class UserGamesCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
-                    Icon(
-                      Icons.blur_circular,
+                    CircleAvatar(
+                      child: Image.asset(
+                        'assets/icons/ballBlackIcon.png',
+                      ),
+                      backgroundColor: Colors.transparent,
+                      radius: 10,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(

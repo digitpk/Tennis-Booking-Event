@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/newGameField.dart';
-import 'package:tennis_event/screens/user/userGames.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class NewGames extends StatefulWidget {
   @override
@@ -11,6 +10,8 @@ class NewGames extends StatefulWidget {
 }
 
 class _NewGameState extends State<NewGames> {
+  int _selectedIndex = 2;
+
   var _countryList = [
     'Select Country',
     'Pakistan',
@@ -29,6 +30,9 @@ class _NewGameState extends State<NewGames> {
           'Create New Game',
           style: kAppbarStyle,
         ),
+      ),
+      bottomNavigationBar: BottomMenuBar(
+        selectedIndex: _selectedIndex = _selectedIndex,
       ),
       body: Column(
         children: [
@@ -169,16 +173,27 @@ class _NewGameState extends State<NewGames> {
               ),
             ),
           ),
-          BottomButton(
-            buttonTitle: 'To to My Games',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MyGames(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                child: Center(
+                    child: Text(
+                  'Create Game',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontFamily: 'Roboto',
+                    color: Colors.white,
+                  ),
+                )),
+                width: 971.0,
+                height: 134.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(67.0),
+                  color: const Color(0xff66af03),
                 ),
-              );
-            },
+              ),
+            ),
           ),
         ],
       ),

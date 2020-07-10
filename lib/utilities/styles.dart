@@ -26,6 +26,12 @@ const kAppbarStyle = TextStyle(
   fontFamily: 'Roboto',
 );
 
+const kAppbarStyleRegister = TextStyle(
+  color: Colors.black,
+  fontWeight: FontWeight.w500,
+  fontFamily: 'Roboto',
+);
+
 const kAppbarCourtStyle = TextStyle(
   fontSize: 20,
   color: Colors.white,

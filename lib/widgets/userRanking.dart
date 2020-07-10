@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_event/utilities/constants.dart';
 
-class userRankingWidget extends StatelessWidget {
-  const userRankingWidget({
+class UserRankingWidget extends StatefulWidget {
+  const UserRankingWidget({
     Key key,
   }) : super(key: key);
 
+  @override
+  _UserRankingWidgetState createState() => _UserRankingWidgetState();
+}
+
+class _UserRankingWidgetState extends State<UserRankingWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +22,9 @@ class userRankingWidget extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 25.0,
-                backgroundImage: AssetImage('images/bg_image.jpg'),
+                backgroundImage: AssetImage(
+                  'assets/images/playerImage.png',
+                ),
               ),
               Text(
                 'Ranks',
@@ -34,14 +41,19 @@ class userRankingWidget extends StatelessWidget {
                 Text(
                   'Player\'s Name',
                   style: TextStyle(
+                    fontFamily: 'Roboto',
                     fontSize: 15,
-                    color: kMainThemeColor,
+                    color: kDividerLineGray,
                   ),
                 ),
                 Row(
                   children: [
-                    Icon(
-                      Icons.blur_circular,
+                    CircleAvatar(
+                      child: Image.asset(
+                        'assets/icons/ball_icon.png',
+                      ),
+                      backgroundColor: Colors.transparent,
+                      radius: 10,
                     ),
                     SizedBox(
                       width: 5,

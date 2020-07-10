@@ -16,6 +16,13 @@ class _PlayersState extends State<Players> {
       appBar: AppBar(
         backgroundColor: kMainThemeColor,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Next page',
+            onPressed: () {},
+          ),
+        ],
         title: Text(
           'Players',
           style: kAppbarStyle,

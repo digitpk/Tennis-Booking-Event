@@ -35,11 +35,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: kMainThemeColor,
+        elevation: 0,
+        backgroundColor: Colors.white10,
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Text(
           'Register Now',
-          style: kAppbarStyle,
+          style: kAppbarStyleRegister,
         ),
       ),
       body: Column(

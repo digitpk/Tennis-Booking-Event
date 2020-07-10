@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/newGameField.dart';
 import 'package:tennis_event/screens/game/joinGame.dart';
+import 'package:tennis_event/screens/settings.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/enumLists.dart';
 import 'package:tennis_event/utilities/styles.dart';
@@ -33,6 +34,22 @@ class _UserProfileState extends State<UserProfile> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.settings,
+            ),
+            tooltip: 'Next page',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Settings(),
+                ),
+              );
+            },
+          ),
+        ],
         backgroundColor: kMainThemeColor,
         centerTitle: true,
         title: Text(
@@ -48,7 +65,9 @@ class _UserProfileState extends State<UserProfile> {
               padding: const EdgeInsets.all(25.0),
               child: CircleAvatar(
                 radius: 50.0,
-                backgroundImage: AssetImage('images/bg_image.jpg'),
+                backgroundImage: AssetImage(
+                  'assets/images/playerImage.png',
+                ),
               ),
             ),
           ),
@@ -69,7 +88,7 @@ class _UserProfileState extends State<UserProfile> {
                           decoration: BoxDecoration(
                             border: Border.all(
                                 width: 2.0,
-                                color: kMainThemeColor,
+                                color: kDividerLineGray,
                                 style: BorderStyle.solid),
                           ),
                           child: Column(

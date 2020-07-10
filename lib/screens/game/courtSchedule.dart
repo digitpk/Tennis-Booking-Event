@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
-import 'package:tennis_event/screens/game/frenchOpenDraw.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class CourtSchedule extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _CourtScheduleState extends State<CourtSchedule> {
 
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 1;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -41,16 +43,78 @@ class _CourtScheduleState extends State<CourtSchedule> {
           ],
         ),
       ),
+      bottomNavigationBar: BottomMenuBar(
+        selectedIndex: _selectedIndex = _selectedIndex,
+      ),
       body: Column(
         children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          'Courts',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Roboto',
+                          ),
+                        ),
+                      ),
+                      width: 486.1,
+                      height: 117.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(58.5),
+                        color: const Color(0xffffffff),
+                        border: Border.all(
+                            width: 1.0, color: const Color(0xff757575)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0x87636363),
+                            offset:
+                                Offset(1.6383041143417358, 1.1471529006958008),
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      child: Center(
+                        child: Text(
+                          'Trainers',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: 'Roboto',
+                          ),
+                        ),
+                      ),
+                      width: 984.0,
+                      height: 117.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50.0),
+//                        color: const Color(0x57e6e6e6),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                shape: BoxShape.rectangle,
                 border: Border.all(
                     width: 2.0,
-                    color: kMainThemeColor,
+                    color: kDividerLineGray,
                     style: BorderStyle.solid),
               ),
               child: DropdownButton<String>(
@@ -108,25 +172,22 @@ class _CourtScheduleState extends State<CourtSchedule> {
                   ),
                   Expanded(
                     flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GridView.count(
-                        crossAxisCount: 5,
-                        children: List<Widget>.generate(5, (index) {
-                          return GridTile(
-                            child: Card(
-                              color: Colors.grey,
-                              shadowColor: Colors.transparent,
-                              child: Center(
-                                child: Text(
-                                  '$index',
-                                  style: kCourtScheduleCardTile,
-                                ),
+                    child: GridView.count(
+                      crossAxisCount: 5,
+                      children: List<Widget>.generate(5, (index) {
+                        return GridTile(
+                          child: Card(
+                            color: Colors.grey,
+                            shadowColor: Colors.transparent,
+                            child: Center(
+                              child: Text(
+                                '$index',
+                                style: kCourtScheduleCardTile,
                               ),
                             ),
-                          );
-                        }),
-                      ),
+                          ),
+                        );
+                      }),
                     ),
                   ),
                 ],
@@ -181,17 +242,6 @@ class _CourtScheduleState extends State<CourtSchedule> {
                 ),
               ],
             ),
-          ),
-          BottomButton(
-            buttonTitle: 'Go to Court Schedule',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FrenchOpenDraw(),
-                ),
-              );
-            },
           ),
         ],
       ),

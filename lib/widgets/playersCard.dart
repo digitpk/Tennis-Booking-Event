@@ -18,22 +18,25 @@ class PlayersCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          const ListTile(
-            leading: CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage(
-                'images/bg_image.jpg',
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 15),
+            child: const ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage(
+                  'assets/images/playerImage.png',
+                ),
               ),
+              title: Text(
+                'Player Name',
+                style: kCardHeading,
+              ),
+              subtitle: Text(
+                'Location',
+                style: kCardSubtitle,
+              ),
+              dense: true,
             ),
-            title: Text(
-              'Player Name',
-              style: kCardHeading,
-            ),
-            subtitle: Text(
-              'Location',
-              style: kCardSubtitle,
-            ),
-            dense: true,
           ),
           Padding(
             padding: const EdgeInsets.only(
@@ -43,8 +46,12 @@ class PlayersCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(
-                  Icons.blur_circular,
+                CircleAvatar(
+                  child: Image.asset(
+                    'assets/icons/ballIcon.png',
+                  ),
+                  backgroundColor: Colors.transparent,
+                  radius: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(

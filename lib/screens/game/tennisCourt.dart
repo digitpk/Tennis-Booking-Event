@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/newGameField.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
-import 'courtSchedule.dart';
+import 'courtSearches.dart';
 import 'createTennisCourt.dart';
 
 class TennisCourt extends StatefulWidget {
@@ -39,9 +38,10 @@ class _TennisCourtState extends State<TennisCourt> {
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
                 border: Border.all(
                     width: 2.0,
-                    color: kMainThemeColor,
+                    color: kDividerLineGray,
                     style: BorderStyle.solid),
               ),
               child: DropdownButton<String>(
@@ -68,61 +68,67 @@ class _TennisCourtState extends State<TennisCourt> {
           ),
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
 //              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
                 NewGFields(
                   labelText: 'Search Court Here',
                 ),
-                SizedBox(
-                  height: 25.0,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                  ),
+                  child: Text('Recent Search'),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FlatButton(
-                      color: kMainThemeColor,
-                      shape: StadiumBorder(),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Text(
-                              'Add New Court',
-                              style: kMainTextStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ],
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NewTennisCourt(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                Expanded(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      RecentCourtSearches(),
+                      RecentCourtSearches(),
+                      RecentCourtSearches(),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          BottomButton(
-            buttonTitle: 'Go to Court Schedule',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CourtSchedule(),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FlatButton(
+                  color: kMainThemeColor,
+                  shape: StadiumBorder(),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Text(
+                          'Add New Court',
+                          style: kMainTextStyle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NewTennisCourt(),
+                      ),
+                    );
+                  },
                 ),
-              );
-            },
+              ],
+            ),
           ),
         ],
       ),

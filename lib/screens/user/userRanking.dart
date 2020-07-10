@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
-import 'package:tennis_event/Widgets/userRanking.dart';
-import 'package:tennis_event/screens/game/newGame.dart';
 import 'package:tennis_event/utilities/boxes.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/userRanking.dart';
 
 class UserRanking extends StatefulWidget {
   @override
@@ -26,27 +24,16 @@ class _RankingState extends State<UserRanking> {
       ),
       body: Column(
         children: [
-          userRankingWidget(),
+          UserRankingWidget(),
           DividerLine(),
-          userRankingWidget(),
+          UserRankingWidget(),
           DividerLine(),
-          userRankingWidget(),
+          UserRankingWidget(),
           DividerLine(),
-          userRankingWidget(),
+          UserRankingWidget(),
           DividerLine(),
-          userRankingWidget(),
+          UserRankingWidget(),
           DividerLine(),
-          BottomButton(
-            buttonTitle: 'Go to Create New Game',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewGames(),
-                ),
-              );
-            },
-          ),
         ],
       ),
     );

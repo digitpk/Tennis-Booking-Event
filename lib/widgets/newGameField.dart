@@ -15,13 +15,13 @@ class NewGFields extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: kMainThemeColor,
+              color: kDividerLineGray,
               width: 2.0,
             ),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color: kMainThemeColor,
+              color: kDividerLineGray,
             ),
           ),
           hintText: hintText,
