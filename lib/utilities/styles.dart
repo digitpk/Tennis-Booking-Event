@@ -45,6 +45,14 @@ const kBottomAppBar = TextStyle(
   fontFamily: 'Roboto',
 );
 
+const kFilterStyle = TextStyle(
+  fontSize: 50,
+  color: Colors.black,
+  fontFamily: 'Roboto',
+  fontWeight: FontWeight.w300,
+  fontStyle: FontStyle.normal,
+);
+
 const kOrganizerGameDetails = TextStyle(
     fontStyle: FontStyle.normal,
     fontFamily: 'Roboto',

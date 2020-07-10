@@ -11,6 +11,26 @@ class MainScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<MainScreen> {
+  Image image;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    image = Image.asset(
+      'assets/images/slider_image.png',
+      fit: BoxFit.cover,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    precacheImage(image.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,10 +46,7 @@ class _SplashScreenState extends State<MainScreen> {
                     padding: const EdgeInsets.symmetric(
                       vertical: 75.0,
                     ),
-                    child: Image.asset(
-                      'assets/images/slider_image.png',
-                      fit: BoxFit.cover,
-                    ),
+                    child: image,
                   ),
                 ),
               ],

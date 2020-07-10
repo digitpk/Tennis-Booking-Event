@@ -13,11 +13,14 @@ class PlayersCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shadowColor: Colors.grey[500],
+      elevation: 5,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const ListTile(
             leading: CircleAvatar(
+              radius: 30,
               backgroundImage: AssetImage(
                 'images/bg_image.jpg',
               ),

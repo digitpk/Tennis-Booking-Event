@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/playersCard.dart';
-import 'package:tennis_event/screens/game/tennisCourt.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
@@ -31,17 +29,6 @@ class _PlayersState extends State<Players> {
               PlayersCard(),
               PlayersCard(),
             ],
-          ),
-          BottomButton(
-            buttonTitle: 'Go to Tennis Court',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TennisCourt(),
-                ),
-              );
-            },
           ),
         ],
       ),

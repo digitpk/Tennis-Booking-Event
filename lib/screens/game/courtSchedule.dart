@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_event/Widgets/bottomButton.dart';
+import 'package:tennis_event/screens/game/frenchOpenDraw.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
@@ -187,7 +188,7 @@ class _CourtScheduleState extends State<CourtSchedule> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CourtSchedule(),
+                  builder: (context) => FrenchOpenDraw(),
                 ),
               );
             },

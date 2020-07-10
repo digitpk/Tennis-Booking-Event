@@ -1,8 +1,10 @@
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/newGameField.dart';
 import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/utilities/constants.dart';
+import 'package:tennis_event/utilities/enumLists.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class UserProfile extends StatefulWidget {
@@ -11,6 +13,9 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  Gender myGender;
+  Gender myLevel;
+
   var _countryList = [
     'Select Country',
     'Pakistan',
@@ -67,26 +72,22 @@ class _UserProfileState extends State<UserProfile> {
                                 color: kMainThemeColor,
                                 style: BorderStyle.solid),
                           ),
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            hint: new Text("Select Country"),
-                            items: _countryList
-                                .map(
-                                  (String dropDownStringItem) =>
-                                      DropdownMenuItem<String>(
-                                    value: dropDownStringItem,
-                                    child: Text(
-                                      dropDownStringItem,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (String newValueSelected) {
-                              setState(() {
-                                this._currentSelectedCountry = newValueSelected;
-                              });
-                            },
-                            value: _currentSelectedCountry,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              CountryListPick(
+                                isShowFlag: false,
+                                isShowTitle: true,
+                                isShowCode: false,
+                                isDownIcon: true,
+                                showEnglishName: true,
+                                onChanged: (CountryCode code) {
+                                  setState(() {
+                                    code.name;
+                                  });
+                                },
+                              ),
+                            ],
                           ),
                         ),
                       ),

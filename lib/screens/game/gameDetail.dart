@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
-import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/utilities/boxes.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class GameDetails extends StatefulWidget {
   @override
@@ -14,6 +13,7 @@ class GameDetails extends StatefulWidget {
 class _GameDetailsState extends State<GameDetails> {
   @override
   Widget build(BuildContext context) {
+    var _selectedIndex = 2;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -23,6 +23,9 @@ class _GameDetailsState extends State<GameDetails> {
           'Game Details',
           style: kAppbarStyle,
         ),
+      ),
+      bottomNavigationBar: BottomMenuBar(
+        selectedIndex: _selectedIndex,
       ),
       body: Column(
         children: <Widget>[
@@ -239,17 +242,6 @@ class _GameDetailsState extends State<GameDetails> {
                 ),
               ],
             ),
-          ),
-          BottomButton(
-            buttonTitle: 'Go to Ranking Page',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => UserRanking(),
-                ),
-              );
-            },
           ),
         ],
       ),

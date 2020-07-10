@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/screens/game/courtSchedule.dart';
 import 'package:tennis_event/utilities/constants.dart';
+
+import 'allScreens.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,6 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var _selectedIndex = 1;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 //      home: MainScreen(),
-      home: CourtSchedule(),
+      home: AllScreens(),
       // Start the app with the "/" named route. In this case, the app starts
       // on the FirstScreen widget.
 //      initialRoute: '/',

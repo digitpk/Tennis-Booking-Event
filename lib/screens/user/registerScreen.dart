@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/newGameField.dart';
 import 'package:tennis_event/utilities/constants.dart';
+import 'package:tennis_event/utilities/countryList.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 import 'userProfile.dart';
@@ -13,16 +14,24 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  var _countryList = [
-    'Select Country',
-    'Pakistan',
-    'India',
-    'USA',
-  ];
-  var _currentSelectedItem = 'Select Country';
+  String selectCountry = 'Select Country';
+
+  List<DropdownMenuItem> getCountryList() {
+    List<DropdownMenuItem<String>> newCountryList = [];
+
+    for (String country in countryList) {
+      var newCountry = DropdownMenuItem(
+        child: Text(country),
+        value: country,
+      );
+      newCountryList.add(newCountry);
+    }
+    return newCountryList;
+  }
 
   @override
   Widget build(BuildContext context) {
+    getCountryList();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -59,25 +68,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           style: BorderStyle.solid),
                     ),
                     child: DropdownButton<String>(
+                      value: selectCountry,
                       isExpanded: true,
-                      hint: new Text("Select Country"),
-                      items: _countryList
-                          .map(
-                            (String dropDownStringItem) =>
-                                DropdownMenuItem<String>(
-                              value: dropDownStringItem,
-                              child: Text(
-                                dropDownStringItem,
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (String newValueSelected) {
+                      items: getCountryList(),
+                      onChanged: (value) {
                         setState(() {
-                          this._currentSelectedItem = newValueSelected;
+                          selectCountry = value;
                         });
                       },
-                      value: _currentSelectedItem,
                     ),
                   ),
                 ),
