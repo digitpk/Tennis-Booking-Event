@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
 import 'package:tennis_event/Widgets/gamesCard.dart';
-import 'package:tennis_event/screens/game/createTennisCourt.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
@@ -34,17 +32,6 @@ class _MyGamesState extends State<MyGames> {
               UserGamesCard(),
               UserGamesCard(),
             ],
-          ),
-          BottomButton(
-            buttonTitle: 'To to Create Tennis Court',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NewTennisCourt(),
-                ),
-              );
-            },
           ),
         ],
       ),

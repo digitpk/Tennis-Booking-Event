@@ -147,9 +147,37 @@ class _JoinGameState extends State<JoinGame> {
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Row(
                             children: [
-                              Icon(Icons.face),
-                              Icon(Icons.face),
-                              Icon(Icons.face),
+                              Stack(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 10,
+                                    child: Icon(
+                                      Icons.face,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5),
+                                    child: CircleAvatar(
+                                      radius: 10,
+                                      child: Icon(
+                                        Icons.face,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(left: 5),
+                                    child: CircleAvatar(
+                                      radius: 10,
+                                      child: Icon(
+                                        Icons.face,
+                                        color: Colors.blue,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                               SizedBox(width: 5.0),
                               Text('6/6 Joined'),
                             ],
