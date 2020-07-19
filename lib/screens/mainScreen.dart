@@ -1,34 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class MainScreen extends StatefulWidget {
+  String id = 'main_screens';
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<MainScreen> {
-  Image image;
-
-  @override
-  void initState() {
-    super.initState();
-
-    image = Image.asset(
-      'assets/images/slider_image.png',
-      fit: BoxFit.cover,
-    );
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    precacheImage(image.image, context);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +30,10 @@ class _SplashScreenState extends State<MainScreen> {
                     padding: const EdgeInsets.symmetric(
                       vertical: 75.0,
                     ),
-                    child: image,
+                    child: Image.asset(
+                      'assets/images/slider_image.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ],

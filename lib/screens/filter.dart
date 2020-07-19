@@ -5,7 +5,9 @@ import 'package:tennis_event/allScreens.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
-class Filter extends StatelessWidget {
+class FilterScreen extends StatelessWidget {
+  String id = 'filter_screen';
+
   @override
   Widget build(BuildContext context) {
     final double distant = 1;
@@ -193,7 +195,7 @@ class Filter extends StatelessWidget {
               ),
             ),
             BottomButton(
-              buttonTitle: 'Main Page',
+              buttonTitle: 'Apply Filter',
               tapping: () {
                 Navigator.push(
                   context,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TournamentDrawgame extends StatelessWidget {
+  String id = 'taurnament_draw_game_screen';
+
   final VoidCallback player2;
   TournamentDrawgame({
     Key key,

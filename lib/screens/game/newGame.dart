@@ -1,142 +1,305 @@
+import 'package:date_field/date_field.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/newGameField.dart';
+import 'package:intl/intl.dart';
+import 'package:tennis_event/screens/game/gameDetail.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomButton.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
+import 'package:tennis_event/widgets/newGameField.dart';
 
 class NewGames extends StatefulWidget {
+  String id = 'new_games_screen';
   @override
   _NewGameState createState() => _NewGameState();
 }
 
 class _NewGameState extends State<NewGames> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 1;
+  DateTime selectedData;
+  String chooseCourt = 'Choose Court';
+  String gameType = 'Choose Game Type';
+  String currency = 'Choose Currency';
+  String tournament = 'Tournament';
+  final formatTime = DateFormat("HH:mm");
 
-  var _countryList = [
-    'Select Country',
-    'Pakistan',
-    'India',
-  ];
-  var _currentSelectedItem = 'Select Country';
+  TextEditingController _controller1, _controller2, _controller3, _controller4;
+
+  void initState() {
+    super.initState();
+    _controller1 = TextEditingController();
+    _controller2 = TextEditingController();
+    _controller3 = TextEditingController();
+    _controller4 = TextEditingController();
+  }
+
+  void dispose() {
+    _controller1.dispose();
+    _controller2.dispose();
+    _controller3.dispose();
+    _controller4.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
         backgroundColor: kMainThemeColor,
         centerTitle: true,
         title: Text(
-          'Create New Game',
+          'New Game',
           style: kAppbarStyle,
         ),
       ),
       bottomNavigationBar: BottomMenuBar(
         selectedIndex: _selectedIndex = _selectedIndex,
       ),
-      body: Column(
-        children: [
-          NewGFields(
-            labelText: 'Game Name',
-          ),
-          NewGFields(
-            labelText: 'Select Date',
-          ),
-          NewGFields(
-            labelText: 'Select Time',
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    width: 2.0,
-                    color: kMainThemeColor,
-                    style: BorderStyle.solid),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            NewGFields(
+              controller: _controller1,
+              labelText: 'Game Name',
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 2.0,
               ),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                hint: new Text("Choose Game Type"),
-                items: _countryList
-                    .map(
-                      (String dropDownStringItem) => DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(
-                          dropDownStringItem,
-                        ),
-                      ),
-                    )
-                    .toList(),
-                onChanged: (String newValueSelected) {
+              child: DateField(
+                label: 'Select Date',
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                    borderSide: BorderSide(
+                      color: kDividerLineGray,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                onDateSelected: (DateTime value) {
                   setState(() {
-                    this._currentSelectedItem = newValueSelected;
+                    selectedData = value;
                   });
                 },
-                value: _currentSelectedItem,
+                selectedDate: selectedData,
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                    width: 2.0,
-                    color: kMainThemeColor,
-                    style: BorderStyle.solid),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 2.0,
               ),
-              child: DropdownButton<String>(
-                isExpanded: true,
-                hint: new Text("Choose Court"),
-                items: _countryList
-                    .map(
-                      (String dropDownStringItem) => DropdownMenuItem<String>(
-                        value: dropDownStringItem,
-                        child: Text(
-                          dropDownStringItem,
+              child: DateTimeField(
+                controller: _controller3,
+                showCursor: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                    borderSide: BorderSide(
+                      color: kDividerLineGray,
+                      width: 2.0,
+                    ),
+                  ),
+                ),
+                format: formatTime,
+                onShowPicker: (context, currentValue) async {
+                  final time = await showTimePicker(
+                    context: context,
+                    initialTime:
+                        TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
+                  );
+                  return DateTimeField.convert(time);
+                },
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: chooseCourt,
+                  items: <String>[
+                    'Choose Court',
+                    'Location 1',
+                    'Location 2',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      chooseCourt = newValue;
+                      print(newValue);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: gameType,
+                  items: <String>[
+                    'Choose Game Type',
+                    'Single',
+                    'Double',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newgameType) {
+                    setState(() {
+                      gameType = newgameType;
+                      print(newgameType);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: tournament,
+                  items: <String>[
+                    'Tournament',
+                    'Yes',
+                    'No',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newtournament) {
+                    setState(() {
+                      tournament = newtournament;
+                      print(newtournament);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 8.0,
+                      top: 2.0,
+                    ),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          width: 2.0,
+                          color: kDividerLineGray,
+                          style: BorderStyle.solid,
                         ),
                       ),
-                    )
-                    .toList(),
-                onChanged: (String newValueSelected) {
-                  setState(() {
-                    this._currentSelectedItem = newValueSelected;
-                  });
-                },
-                value: _currentSelectedItem,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Container(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Center(
-                      child: Text(
-                        'Submit',
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: currency,
+                        items: <String>[
+                          'Choose Currency',
+                          'USD',
+                          'SR',
+                          'PKR',
+                          'INR',
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (String newcurrency) {
+                          setState(() {
+                            currency = newcurrency;
+                            print(newcurrency);
+                          });
+                        },
                       ),
                     ),
                   ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100.0),
-                color: const Color(0xff66af03),
-              ),
+                ),
+                Expanded(
+                  child: NewGFields(
+                    controller: _controller4,
+                    labelText: 'Price',
+                  ),
+                )
+              ],
             ),
-          ),
-        ],
+            NewGFields(
+              controller: _controller2,
+              labelText: 'Notes',
+            ),
+            BottomButton(
+              buttonTitle: 'Create Game',
+              tapping: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GameDetails(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

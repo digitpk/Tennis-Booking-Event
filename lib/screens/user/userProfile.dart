@@ -1,34 +1,40 @@
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
-import 'package:tennis_event/Widgets/newGameField.dart';
-import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/screens/settings.dart';
+import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
-import 'package:tennis_event/utilities/enumLists.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomButton.dart';
+import 'package:tennis_event/widgets/newGameField.dart';
 
 class UserProfile extends StatefulWidget {
+  String id = 'user_profile_screen';
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
 class _UserProfileState extends State<UserProfile> {
-  Gender myGender;
-  Gender myLevel;
+  String myGender = 'Choose Gender';
+  String myYob = 'Choose Year of Birth';
+  String myLevel = 'Choose Play Level';
+  String side = 'Choose Side';
+  String myCountry;
+  String username;
+  TextEditingController _controller1, _controller2;
 
-  var _countryList = [
-    'Select Country',
-    'Pakistan',
-    'India',
-  ];
-//  var _sides = [
-//    'Select Side',
-//    'Right Handed',
-//    'Left Handed',
-//  ];
-  var _currentSelectedCountry = 'Select Country';
-  var _selectedSide = 'Right-left Handed';
+  void initState() {
+    super.initState();
+    _controller1 = TextEditingController();
+    _controller2 = TextEditingController();
+  }
+
+  void dispose() {
+    _controller1.dispose();
+    _controller2.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +45,7 @@ class _UserProfileState extends State<UserProfile> {
             icon: const Icon(
               Icons.settings,
             ),
-            tooltip: 'Next page',
+            tooltip: 'Settings Page',
             onPressed: () {
               Navigator.push(
                 context,
@@ -57,146 +63,222 @@ class _UserProfileState extends State<UserProfile> {
           style: kAppbarStyle,
         ),
       ),
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(25.0),
-              child: CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage(
-                  'assets/images/playerImage.png',
+      body: SingleChildScrollView(
+        reverse: false,
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 50.0,
+              backgroundImage: AssetImage('assets/images/playerImage.png'),
+            ),
+            NewGFields(
+              onchange: username,
+              controller: _controller1,
+              labelText: 'Username',
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                      width: 2.0,
+                      color: kDividerLineGray,
+                      style: BorderStyle.solid),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    CountryListPick(
+                      isShowFlag: true,
+                      isShowTitle: true,
+                      isDownIcon: true,
+                      showEnglishName: true,
+                      onChanged: (CountryCode code) {
+                        setState(() {
+                          myCountry = code.name;
+                          print(myCountry);
+                        });
+                      },
+                    ),
+                  ],
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      NewGFields(
-                        labelText: 'Username',
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2.0,
-                                color: kDividerLineGray,
-                                style: BorderStyle.solid),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              CountryListPick(
-                                isShowFlag: false,
-                                isShowTitle: true,
-                                isShowCode: false,
-                                isDownIcon: true,
-                                showEnglishName: true,
-                                onChanged: (CountryCode code) {
-                                  setState(() {
-                                    code.name;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2.0,
-                                color: kMainThemeColor,
-                                style: BorderStyle.solid),
-                          ),
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            hint: new Text("Choose Side"),
-                            items: _countryList
-                                .map(
-                                  (String dropDownStringItem) =>
-                                      DropdownMenuItem<String>(
-                                    value: dropDownStringItem,
-                                    child: Text(
-                                      dropDownStringItem,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (String newValueSelected) {
-                              setState(() {
-                                this._currentSelectedCountry = newValueSelected;
-                              });
-                            },
-                            value: _currentSelectedCountry,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 2.0,
-                                color: kMainThemeColor,
-                                style: BorderStyle.solid),
-                          ),
-                          child: DropdownButton<String>(
-                            isExpanded: true,
-                            hint: new Text("Choose Side"),
-                            items: _countryList
-                                .map(
-                                  (String dropDownStringItem) =>
-                                      DropdownMenuItem<String>(
-                                    value: dropDownStringItem,
-                                    child: Text(
-                                      dropDownStringItem,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                            onChanged: (String newValueSelected) {
-                              setState(() {
-                                this._currentSelectedCountry = newValueSelected;
-                              });
-                            },
-                            value: _currentSelectedCountry,
-                          ),
-                        ),
-                      ),
-                      NewGFields(
-                        labelText: 'Phone No.',
-                      ),
-                    ],
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
                   ),
                 ),
-              ],
-            ),
-          ),
-          BottomButton(
-            buttonTitle: 'Save',
-            tapping: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => JoinGame(),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: side,
+                  items: <String>[
+                    'Choose Side',
+                    'Left Sided',
+                    'Right Sided',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      side = newValue;
+                      print(newValue);
+                    });
+                  },
                 ),
-              );
-            },
-          ),
-        ],
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: myLevel,
+                  items: <String>[
+                    'Choose Play Level',
+                    'Beginner',
+                    'Intermediate',
+                    'Professional',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newValue) {
+                    setState(() {
+                      myLevel = newValue;
+                      print(newValue);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: myGender,
+                  items: <String>[
+                    'Choose Gender',
+                    'Male',
+                    'Female',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newgender) {
+                    setState(() {
+                      myGender = newgender;
+                      print(newgender);
+                    });
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 2.0,
+                    color: kDividerLineGray,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                child: DropdownButton<String>(
+                  isExpanded: true,
+                  value: myYob,
+                  items: <String>[
+                    'Choose Year of Birth',
+                    '1990',
+                    '1991',
+                    '1992',
+                    '1993',
+                    '1994',
+                    '1995',
+                    '1996',
+                    '1997',
+                    '1998',
+                    '1999',
+                    '2001',
+                    '2002',
+                    '2003',
+                    '2004',
+                  ].map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  onChanged: (String newYob) {
+                    setState(() {
+                      myYob = newYob;
+                      print(newYob);
+                    });
+                  },
+                ),
+              ),
+            ),
+            NewGFields(
+              controller: _controller2,
+              labelText: 'Phone Number',
+            ),
+            BottomButton(
+              buttonTitle: 'Save',
+              tapping: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterScreen(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

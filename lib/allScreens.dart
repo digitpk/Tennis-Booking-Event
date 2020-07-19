@@ -17,10 +17,11 @@ import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
-import 'chat/mainChat.dart';
+import 'chat/login.dart';
 
 // ignore: must_be_immutable
 class AllScreens extends StatelessWidget {
+  String id = 'all_screens';
   int _selectedIndex = 0;
 
   @override
@@ -53,7 +54,7 @@ class AllScreens extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MyChatapp(),
+                          builder: (context) => LoginScreen(),
                         ),
                       );
                     },
@@ -262,7 +263,7 @@ class AllScreens extends StatelessWidget {
                         PageRouteBuilder(
                           opaque: false,
                           pageBuilder: (BuildContext context, _, __) =>
-                              Filter(),
+                              FilterScreen(),
                         ),
                       );
                     },

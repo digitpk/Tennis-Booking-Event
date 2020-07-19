@@ -2,17 +2,25 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_event/screens/filter.dart';
 import 'package:tennis_event/utilities/constants.dart';
+import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class JoinGame extends StatefulWidget {
+  String id = 'join_game_screen';
   @override
   _JoinGameState createState() => _JoinGameState();
 }
 
 class _JoinGameState extends State<JoinGame> {
+  int _selectedIndex = 2;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomMenuBar(
+        selectedIndex: _selectedIndex,
+      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(
@@ -45,9 +53,16 @@ class _JoinGameState extends State<JoinGame> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.filter_list,
-                      size: 25,
+                    child: IconButton(
+                      icon: Icon(Icons.filter_list),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FilterScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

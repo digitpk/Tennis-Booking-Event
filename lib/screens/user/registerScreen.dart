@@ -1,37 +1,146 @@
+import 'package:country_list_pick/country_list_pick.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tennis_event/Widgets/bottomButton.dart';
-import 'package:tennis_event/Widgets/newGameField.dart';
+import 'package:flutter/services.dart';
+import 'package:tennis_event/screens/game/joinGame.dart';
+import 'package:tennis_event/screens/user/userProfile.dart';
 import 'package:tennis_event/utilities/constants.dart';
-import 'package:tennis_event/utilities/countryList.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
-import 'userProfile.dart';
-
 class RegisterScreen extends StatefulWidget {
+  String id = 'register_screen';
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  String selectCountry = 'Select Country';
+  var countrycode;
+  var phonenumber;
+  String phoneNo;
+  String smsOTP;
+  String verificationId;
+  String errorMessage = '';
+  FirebaseAuth _auth = FirebaseAuth.instance;
 
-  List<DropdownMenuItem> getCountryList() {
-    List<DropdownMenuItem<String>> newCountryList = [];
-
-    for (String country in countryList) {
-      var newCountry = DropdownMenuItem(
-        child: Text(country),
-        value: country,
-      );
-      newCountryList.add(newCountry);
+  Future<void> verifyPhone() async {
+    final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
+      this.verificationId = verId;
+      smsOTPDialog(context).then((value) {
+        print('sign in');
+      });
+    };
+    try {
+      await _auth.verifyPhoneNumber(
+          phoneNumber: phoneNo,
+          codeAutoRetrievalTimeout: (String verId) {
+            this.verificationId = verId;
+          },
+          codeSent:
+              smsOTPSent, // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
+          timeout: const Duration(seconds: 10),
+          verificationCompleted: (AuthCredential phoneAuthCredential) {
+            print(phoneAuthCredential);
+          },
+          verificationFailed: (AuthException exceptio) {
+            print('${exceptio.message}');
+          });
+    } catch (e) {
+      handleError(e);
     }
-    return newCountryList;
+  }
+
+  Future<bool> smsOTPDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: Text('Enter SMS Code'),
+            content: Container(
+              height: 85,
+              child: Column(children: [
+                TextField(
+                  onChanged: (value) {
+                    this.smsOTP = value;
+                  },
+                ),
+                (errorMessage != ''
+                    ? Text(
+                        errorMessage,
+                        style: TextStyle(color: Colors.red),
+                      )
+                    : Container())
+              ]),
+            ),
+            contentPadding: EdgeInsets.all(10),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Register'),
+                onPressed: () {
+                  _auth.currentUser().then((user) {
+                    if (user != null) {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UserProfile(),
+                        ),
+                      );
+                    } else {
+                      signIn();
+                    }
+                  });
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  signIn() async {
+    try {
+      final AuthCredential credential = PhoneAuthProvider.getCredential(
+        verificationId: verificationId,
+        smsCode: smsOTP,
+      );
+      final FirebaseUser user =
+          await _auth.signInWithCredential(credential) as FirebaseUser;
+      final FirebaseUser currentUser = await _auth.currentUser();
+      assert(user.uid == currentUser.uid);
+      Navigator.of(context).pop();
+      Navigator.of(context).pushReplacementNamed('/homepage');
+    } catch (e) {
+      handleError(e);
+    }
+  }
+
+  handleError(PlatformException error) {
+    print(error);
+    switch (error.code) {
+      case 'ERROR_INVALID_VERIFICATION_CODE':
+        FocusScope.of(context).requestFocus(new FocusNode());
+        setState(() {
+          errorMessage = 'Invalid Code';
+        });
+        Navigator.of(context).pop();
+        smsOTPDialog(context).then((value) {
+          print('sign in');
+        });
+        break;
+      default:
+        setState(() {
+          errorMessage = error.message;
+        });
+
+        break;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    getCountryList();
+    var _controller2;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -65,27 +174,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           Expanded(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+//              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 16.0),
                     decoration: BoxDecoration(
                       border: Border.all(
                           width: 2.0,
-                          color: kMainThemeColor,
+                          color: kDividerLineGray,
                           style: BorderStyle.solid),
                     ),
-                    child: DropdownButton<String>(
-                      value: selectCountry,
-                      isExpanded: true,
-                      items: getCountryList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectCountry = value;
-                        });
-                      },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        CountryListPick(
+                          isShowFlag: true,
+                          isShowTitle: true,
+                          isShowCode: true,
+                          isDownIcon: true,
+                          showEnglishName: true,
+                          onChanged: (CountryCode code) {
+                            setState(() {
+                              countrycode = code.dialCode;
+                              print(countrycode);
+                            });
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -93,8 +209,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: NewGFields(
-                          labelText: 'Phone No.',
+                        child: Padding(
+                          padding: EdgeInsets.all(10),
+                          child: TextField(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: kDividerLineGray,
+                                  width: 2.0,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: const BorderRadius.all(
+                                  const Radius.circular(10.0),
+                                ),
+                                borderSide: BorderSide(
+                                  color: kDividerLineGray,
+                                ),
+                              ),
+                              hintText: '0123 1234567',
+                              labelText: 'Phone No.',
+                            ),
+                            onChanged: (value) {
+                              phonenumber = value;
+                              print(phonenumber);
+                            },
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -111,7 +254,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           child: Text(
                             'Verify',
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print(countrycode + phonenumber);
+                            this.phoneNo = countrycode + phonenumber;
+                            print(phoneNo);
+                            print(this.phoneNo);
+                            verifyPhone();
+                          },
                         ),
                       ),
                     ],
@@ -120,32 +269,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-          SizedBox(
-            height: 25.0,
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 50,
-              ),
-              child: NewGFields(
-                labelText: 'Enter Code',
-              ),
-            ),
-          ),
-          Expanded(
-            child: BottomButton(
-              buttonTitle: 'Register',
-              tapping: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => UserProfile(),
-                  ),
-                );
-              },
-            ),
-          ),
+//          SizedBox(
+//            height: 25.0,
+//          ),
+//          Expanded(
+//            child: Padding(
+//              padding: const EdgeInsets.only(
+//                top: 50,
+//              ),
+//              child: NewGFields(
+//                onchange: (value) {
+//                  this.smsOTP = value;
+//                },
+//                labelText: 'Enter Code',
+//              ),
+//            ),
+//          ),
+//          Expanded(
+//            child: BottomButton(
+//              buttonTitle: 'Register',
+//              tapping: () {
+//                Navigator.push(
+//                  context,
+//                  MaterialPageRoute(
+//                    builder: (context) => UserProfile(),
+//                  ),
+//                );
+//              },
+//            ),
+//          ),
         ],
       ),
     );

@@ -1,8 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_event/screens/filter.dart';
+import 'package:tennis_event/screens/game/courtSchedule.dart';
+import 'package:tennis_event/screens/game/courtSearches.dart';
+import 'package:tennis_event/screens/game/createTennisCourt.dart';
+import 'package:tennis_event/screens/game/frenchOpenDraw.dart';
+import 'package:tennis_event/screens/game/gameDetail.dart';
+import 'package:tennis_event/screens/game/joinGame.dart';
+import 'package:tennis_event/screens/game/newGame.dart';
+import 'package:tennis_event/screens/game/tennisCourt.dart';
+import 'package:tennis_event/screens/mainScreen.dart';
+import 'package:tennis_event/screens/settings.dart';
+import 'package:tennis_event/screens/user/players.dart';
+import 'package:tennis_event/screens/user/registerScreen.dart';
+import 'package:tennis_event/screens/user/userGames.dart';
+import 'package:tennis_event/screens/user/userProfile.dart';
+import 'package:tennis_event/screens/user/userRanking.dart';
+import 'package:tennis_event/splashScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
-
-import 'allScreens.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,18 +37,35 @@ class MyApp extends StatelessWidget {
           headline2: TextStyle(fontSize: 20.0, fontStyle: FontStyle.normal),
         ),
       ),
-//      home: MainScreen(),
-      home: AllScreens(),
-      // Start the app with the "/" named route. In this case, the app starts
-      // on the FirstScreen widget.
-//      initialRoute: '/',
-//      routes: {
-//        // When navigating to the "/" route, build the FirstScreen widget.
-//        '/': (context) => MainScreen(),
-//        // When navigating to the "/second" route, build the SecondScreen widget.
-//        '/second': (context) => Settings(),
-//        '/third': (context) => Settings(),
-//      },
+      home: Splash(),
+//      initialRoute: UserRanking().id,
+      routes: {
+//        AllScreens().id: (context) => AllScreens(),
+        MainScreen().id: (context) => MainScreen(),
+
+        //players screens
+        Players().id: (context) => Players(),
+        RegisterScreen().id: (context) => RegisterScreen(),
+        MyGames().id: (context) => MyGames(),
+        UserProfile().id: (context) => UserProfile(),
+        UserRanking().id: (context) => UserRanking(),
+
+        //Game Screens
+        CourtSchedule().id: (context) => CourtSchedule(),
+        RecentCourtSearches().id: (context) => RecentCourtSearches(),
+        NewTennisCourt().id: (context) => NewTennisCourt(),
+        TournamentDrawgame().id: (context) => TournamentDrawgame(),
+        GameDetails().id: (context) => GameDetails(),
+        JoinGame().id: (context) => JoinGame(),
+        NewGames().id: (context) => NewGames(),
+        TennisCourt().id: (context) => TennisCourt(),
+
+        //Chat Screens
+
+        //Other Screens
+        FilterScreen().id: (context) => FilterScreen(),
+        Settings().id: (context) => Settings(),
+      },
     );
   }
 }

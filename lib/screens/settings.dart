@@ -3,6 +3,7 @@ import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class Settings extends StatefulWidget {
+  String id = 'setting_screen';
   @override
   _SettingsState createState() => _SettingsState();
 }
