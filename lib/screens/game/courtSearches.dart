@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RecentCourtSearches extends StatefulWidget {
-  String id = 'recent_court_searches_screen';
+  static const String id = 'recent_court_searches_screen';
 
   @override
   _RecentCourtSearchesState createState() => _RecentCourtSearchesState();

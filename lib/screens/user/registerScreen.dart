@@ -3,13 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/screens/user/userProfile.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class RegisterScreen extends StatefulWidget {
-  String id = 'register_screen';
+  static const String id = 'register_screen';
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }

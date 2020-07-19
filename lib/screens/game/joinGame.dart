@@ -7,7 +7,7 @@ import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class JoinGame extends StatefulWidget {
-  String id = 'join_game_screen';
+  static const String id = 'join_game_screen';
   @override
   _JoinGameState createState() => _JoinGameState();
 }

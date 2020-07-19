@@ -8,6 +8,8 @@ import 'package:tennis_event/screens/user/userGames.dart';
 import 'package:tennis_event/utilities/constants.dart';
 
 class Splash extends StatefulWidget {
+  static const String id = 'splash_screen';
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -24,7 +26,7 @@ class _SplashScreenState extends State<Splash> {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 5,
-      navigateAfterSeconds: MainScreen().id,
+      navigateAfterSeconds: MainScreen.id,
       title: Text(
         'Tennis Event Registration',
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
@@ -53,9 +55,9 @@ class _SplashScreenState extends State<Splash> {
     var status = prefs.getBool('isLoggedIn') ?? false;
     print(status);
     if (status) {
-      Navigator.pushReplacementNamed(context, MyGames().id);
+      Navigator.pushReplacementNamed(context, MyGames.id);
     } else {
-      Navigator.pushReplacementNamed(context, MainScreen().id);
+      Navigator.pushReplacementNamed(context, MainScreen.id);
     }
   }
 }

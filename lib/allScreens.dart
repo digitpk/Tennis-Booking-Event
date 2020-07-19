@@ -21,7 +21,7 @@ import 'chat/login.dart';
 
 // ignore: must_be_immutable
 class AllScreens extends StatelessWidget {
-  String id = 'all_screens';
+  static const String id = 'all_screens';
   int _selectedIndex = 0;
 
   @override

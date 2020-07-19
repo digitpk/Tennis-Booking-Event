@@ -6,7 +6,7 @@ import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomButton.dart';
 
 class NewTennisCourt extends StatefulWidget {
-  String id = 'new_tennis_court_screen';
+  static const String id = 'new_tennis_court_screen';
   @override
   _NewTennisCourtState createState() => _NewTennisCourtState();
 }

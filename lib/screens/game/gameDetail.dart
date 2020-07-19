@@ -6,7 +6,7 @@ import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class GameDetails extends StatefulWidget {
-  String id = 'game_details_screen';
+  static const String id = 'game_details_screen';
   @override
   _GameDetailsState createState() => _GameDetailsState();
 }

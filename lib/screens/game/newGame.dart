@@ -10,7 +10,7 @@ import 'package:tennis_event/widgets/bottomMenuBar.dart';
 import 'package:tennis_event/widgets/newGameField.dart';
 
 class NewGames extends StatefulWidget {
-  String id = 'new_games_screen';
+  static const String id = 'new_games_screen';
   @override
   _NewGameState createState() => _NewGameState();
 }

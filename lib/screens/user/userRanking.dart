@@ -6,7 +6,7 @@ import 'package:tennis_event/widgets/bottomMenuBar.dart';
 import 'package:tennis_event/widgets/userRanking.dart';
 
 class UserRanking extends StatefulWidget {
-  String id = 'user_ranking_screen';
+  static const String id = 'user_ranking_screen';
   @override
   _RankingState createState() => _RankingState();
 }

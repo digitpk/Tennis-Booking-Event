@@ -19,6 +19,8 @@ import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/splashScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
 
+import 'allScreens.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -37,34 +39,35 @@ class MyApp extends StatelessWidget {
           headline2: TextStyle(fontSize: 20.0, fontStyle: FontStyle.normal),
         ),
       ),
-      home: Splash(),
-//      initialRoute: UserRanking().id,
+//      home: Splash(),
+      initialRoute: Splash.id,
       routes: {
-//        AllScreens().id: (context) => AllScreens(),
-        MainScreen().id: (context) => MainScreen(),
+        AllScreens.id: (context) => AllScreens(),
+        Splash.id: (context) => Splash(),
+        MainScreen.id: (context) => MainScreen(),
 
         //players screens
-        Players().id: (context) => Players(),
-        RegisterScreen().id: (context) => RegisterScreen(),
-        MyGames().id: (context) => MyGames(),
-        UserProfile().id: (context) => UserProfile(),
-        UserRanking().id: (context) => UserRanking(),
+        Players.id: (context) => Players(),
+        RegisterScreen.id: (context) => RegisterScreen(),
+        MyGames.id: (context) => MyGames(),
+        UserProfile.id: (context) => UserProfile(),
+        UserRanking.id: (context) => UserRanking(),
 
         //Game Screens
-        CourtSchedule().id: (context) => CourtSchedule(),
-        RecentCourtSearches().id: (context) => RecentCourtSearches(),
-        NewTennisCourt().id: (context) => NewTennisCourt(),
-        TournamentDrawgame().id: (context) => TournamentDrawgame(),
-        GameDetails().id: (context) => GameDetails(),
-        JoinGame().id: (context) => JoinGame(),
-        NewGames().id: (context) => NewGames(),
-        TennisCourt().id: (context) => TennisCourt(),
+        CourtSchedule.id: (context) => CourtSchedule(),
+        RecentCourtSearches.id: (context) => RecentCourtSearches(),
+        NewTennisCourt.id: (context) => NewTennisCourt(),
+        TournamentDrawgame.id: (context) => TournamentDrawgame(),
+        GameDetails.id: (context) => GameDetails(),
+        JoinGame.id: (context) => JoinGame(),
+        NewGames.id: (context) => NewGames(),
+        TennisCourt.id: (context) => TennisCourt(),
 
         //Chat Screens
 
         //Other Screens
-        FilterScreen().id: (context) => FilterScreen(),
-        Settings().id: (context) => Settings(),
+        FilterScreen.id: (context) => FilterScreen(),
+        Settings.id: (context) => Settings(),
       },
     );
   }

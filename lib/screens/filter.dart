@@ -6,7 +6,7 @@ import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class FilterScreen extends StatelessWidget {
-  String id = 'filter_screen';
+  static const String id = 'filter_screen';
 
   @override
   Widget build(BuildContext context) {

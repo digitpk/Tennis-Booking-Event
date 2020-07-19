@@ -5,7 +5,7 @@ import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 
 class MyGames extends StatefulWidget {
-  String id = 'mygames_screen';
+  static const String id = 'mygames_screen';
   @override
   _MyGamesState createState() => _MyGamesState();
 }

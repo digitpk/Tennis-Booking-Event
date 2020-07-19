@@ -9,7 +9,7 @@ import 'package:tennis_event/widgets/bottomButton.dart';
 import 'package:tennis_event/widgets/newGameField.dart';
 
 class UserProfile extends StatefulWidget {
-  String id = 'user_profile_screen';
+  static const String id = 'user_profile_screen';
   @override
   _UserProfileState createState() => _UserProfileState();
 }

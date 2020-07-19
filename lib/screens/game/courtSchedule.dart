@@ -7,7 +7,7 @@ import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class CourtSchedule extends StatefulWidget {
-  String id = 'court_schedule_screen';
+  static const String id = 'court_schedule_screen';
   @override
   _CourtScheduleState createState() => _CourtScheduleState();
 }
