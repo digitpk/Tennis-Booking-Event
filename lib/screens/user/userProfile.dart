@@ -1,8 +1,8 @@
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/screens/settings.dart';
-import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomButton.dart';
@@ -272,7 +272,7 @@ class _UserProfileState extends State<UserProfile> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RegisterScreen(),
+                    builder: (context) => JoinGame(),
                   ),
                 );
               },

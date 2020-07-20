@@ -25,6 +25,7 @@ class NewGFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool _validate = false;
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 8.0,
@@ -36,25 +37,27 @@ class NewGFields extends StatelessWidget {
         },
         controller: _controller,
         decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(10.0),
-              ),
-              borderSide: BorderSide(
-                color: kDividerLineGray,
-                width: 2.0,
-              ),
+          errorText: _validate ? 'Enter Text' : null,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(10.0),
-              ),
-              borderSide: BorderSide(
-                color: kDividerLineGray,
-              ),
+            borderSide: BorderSide(
+              color: kDividerLineGray,
+              width: 2.0,
             ),
-            labelText: labelText,
-            hintText: hintText),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(
+              const Radius.circular(10.0),
+            ),
+            borderSide: BorderSide(
+              color: kDividerLineGray,
+            ),
+          ),
+          labelText: labelText,
+          hintText: hintText,
+        ),
       ),
     );
   }

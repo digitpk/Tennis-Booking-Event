@@ -54,7 +54,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) {
-          return new AlertDialog(
+          return AlertDialog(
             title: Text('Enter SMS Code'),
             content: Container(
               height: 85,
@@ -108,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       final FirebaseUser currentUser = await _auth.currentUser();
       assert(user.uid == currentUser.uid);
       Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed('/homepage');
+      Navigator.of(context).pushReplacementNamed(UserProfile.id);
     } catch (e) {
       handleError(e);
     }

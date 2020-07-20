@@ -13,7 +13,7 @@ class JoinGame extends StatefulWidget {
 }
 
 class _JoinGameState extends State<JoinGame> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
