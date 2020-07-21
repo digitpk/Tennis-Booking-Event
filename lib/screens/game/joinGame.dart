@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_event/screens/filter.dart';
 import 'package:tennis_event/utilities/constants.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class JoinGame extends StatefulWidget {
   static const String id = 'join_game_screen';
@@ -18,9 +17,6 @@ class _JoinGameState extends State<JoinGame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex,
-      ),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Column(

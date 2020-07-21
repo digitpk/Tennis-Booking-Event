@@ -11,6 +11,7 @@ class MyGames extends StatefulWidget {
 }
 
 class _MyGamesState extends State<MyGames> {
+  int _selectedIndex = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

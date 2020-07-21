@@ -14,7 +14,6 @@ import 'package:tennis_event/screens/settings.dart';
 import 'package:tennis_event/screens/user/players.dart';
 import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/screens/user/userGames.dart';
-import 'package:tennis_event/screens/user/userProfile.dart';
 import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/splashScreen.dart';
 import 'package:tennis_event/utilities/constants.dart';
@@ -50,7 +49,7 @@ class MyApp extends StatelessWidget {
         Players.id: (context) => Players(),
         RegisterScreen.id: (context) => RegisterScreen(),
         MyGames.id: (context) => MyGames(),
-        UserProfile.id: (context) => UserProfile(),
+//        UserProfile.id: (context) => UserProfile(),
         UserRanking.id: (context) => UserRanking(),
 
         //Game Screens

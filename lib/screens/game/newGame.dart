@@ -6,7 +6,6 @@ import 'package:tennis_event/screens/game/gameDetail.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomButton.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
 import 'package:tennis_event/widgets/newGameField.dart';
 
 class NewGames extends StatefulWidget {
@@ -16,7 +15,7 @@ class NewGames extends StatefulWidget {
 }
 
 class _NewGameState extends State<NewGames> {
-  int _selectedIndex = 1;
+  int _selectedIndex = 2;
   DateTime selectedData;
   String chooseCourt = 'Choose Court';
   String gameType = 'Choose Game Type';
@@ -60,9 +59,6 @@ class _NewGameState extends State<NewGames> {
           'New Game',
           style: kAppbarStyle,
         ),
-      ),
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex = _selectedIndex,
       ),
       body: SingleChildScrollView(
         child: Column(

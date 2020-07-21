@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class CourtSchedule extends StatefulWidget {
   static const String id = 'court_schedule_screen';
@@ -43,9 +42,6 @@ class _CourtScheduleState extends State<CourtSchedule> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex = _selectedIndex,
       ),
       body: Column(
         children: [

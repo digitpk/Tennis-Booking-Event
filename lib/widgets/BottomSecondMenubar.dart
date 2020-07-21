@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_event/screens/game/joinGame.dart';
 import 'package:tennis_event/screens/game/newGame.dart';
 import 'package:tennis_event/screens/user/userGames.dart';
 import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/utilities/constants.dart';
 
-class BottomMenuBar extends StatefulWidget {
+class BottomSecondMbar extends StatefulWidget {
   @override
-  _BottomMenuBarState createState() => _BottomMenuBarState();
+  _BottomSecondMbarState createState() => _BottomSecondMbarState();
 }
 
-class _BottomMenuBarState extends State<BottomMenuBar> {
+class _BottomSecondMbarState extends State<BottomSecondMbar> {
   int _currentIndex = 0;
   final List<Widget> _children = [
-    JoinGame(),
     MyGames(),
     NewGames(),
     UserRanking(),
@@ -23,9 +21,8 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
         backgroundColor: Colors.white,
-        selectedLabelStyle: TextStyle(fontFamily: 'Roboto'),
+        iconSize: 25,
         currentIndex: _currentIndex,
         // this will be set when a new tab is tapped
         onTap: onTabTapped,
@@ -46,26 +43,14 @@ class _BottomMenuBarState extends State<BottomMenuBar> {
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/icons/game_icon.png',
-              scale: 15,
+              scale: 10,
               fit: BoxFit.scaleDown,
             ),
             title: Text('Games'),
           ),
           BottomNavigationBarItem(
-            icon: Image.asset(
-              'assets/icons/gameInvite.png',
-              scale: 25,
-              fit: BoxFit.scaleDown,
-            ),
+            icon: Icon(Icons.group_add),
             title: Text('Invite'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.star),
-            title: Text('Ranking'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            title: Text('Chat'),
           ),
         ],
         elevation: 25,

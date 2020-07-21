@@ -3,7 +3,6 @@ import 'package:flutter/rendering.dart';
 import 'package:tennis_event/utilities/boxes.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
 
 class GameDetails extends StatefulWidget {
   static const String id = 'game_details_screen';
@@ -24,9 +23,6 @@ class _GameDetailsState extends State<GameDetails> {
           'Game Details',
           style: kAppbarStyle,
         ),
-      ),
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex,
       ),
       body: Column(
         children: <Widget>[

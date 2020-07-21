@@ -11,13 +11,9 @@ import 'package:tennis_event/screens/mainScreen.dart';
 import 'package:tennis_event/screens/user/players.dart';
 import 'package:tennis_event/screens/user/registerScreen.dart';
 import 'package:tennis_event/screens/user/userGames.dart';
-import 'package:tennis_event/screens/user/userProfile.dart';
 import 'package:tennis_event/screens/user/userRanking.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
-
-import 'chat/login.dart';
 
 // ignore: must_be_immutable
 class AllScreens extends StatelessWidget {
@@ -36,9 +32,6 @@ class AllScreens extends StatelessWidget {
           style: kAppbarStyle,
         ),
       ),
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex,
-      ),
       body: Column(
         children: [
           Expanded(
@@ -54,7 +47,7 @@ class AllScreens extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LoginScreen(),
+                          builder: (context) => null,
                         ),
                       );
                     },
@@ -121,12 +114,12 @@ class AllScreens extends StatelessWidget {
                     child: Text("User Profile"),
                     elevation: 5.0,
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UserProfile(),
-                        ),
-                      );
+//                      Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                          builder: (context) => UserProfile(),
+//                        ),
+//                      );
                     },
                   ),
                 ],

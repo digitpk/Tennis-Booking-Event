@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tennis_event/screens/user/userProfile.dart';
 import 'package:tennis_event/utilities/constants.dart';
+import 'package:tennis_event/utilities/sharedData.dart';
 import 'package:tennis_event/utilities/styles.dart';
+import 'package:tennis_event/widgets/bottomButton.dart';
+import 'package:tennis_event/widgets/newGameField.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const String id = 'register_screen';
@@ -28,6 +31,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       smsOTPDialog(context).then((value) {
         print('sign in');
       });
+      print('sign in');
     };
     try {
       await _auth.verifyPhoneNumber(
@@ -77,13 +81,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               FlatButton(
                 child: Text('Register'),
                 onPressed: () {
+                  SharedData data = SharedData(
+                    cCode: countrycode,
+                  );
                   _auth.currentUser().then((user) {
                     if (user != null) {
                       Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserProfile(),
+                          builder: (context) => UserProfile(data),
                         ),
                       );
                     } else {
@@ -126,6 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         smsOTPDialog(context).then((value) {
           print('sign in');
         });
+        print('sign in');
         break;
       default:
         setState(() {
@@ -173,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           Expanded(
             child: Column(
-//              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -268,35 +276,48 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ],
             ),
           ),
-//          SizedBox(
-//            height: 25.0,
-//          ),
-//          Expanded(
-//            child: Padding(
-//              padding: const EdgeInsets.only(
-//                top: 50,
-//              ),
-//              child: NewGFields(
-//                onchange: (value) {
-//                  this.smsOTP = value;
-//                },
-//                labelText: 'Enter Code',
-//              ),
-//            ),
-//          ),
-//          Expanded(
-//            child: BottomButton(
-//              buttonTitle: 'Register',
-//              tapping: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(
-//                    builder: (context) => UserProfile(),
-//                  ),
-//                );
-//              },
-//            ),
-//          ),
+          SizedBox(
+            height: 25.0,
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 50,
+              ),
+              child: NewGFields(
+                controller: _controller2,
+                onchange: (value) {
+                  this.smsOTP = value;
+                },
+                labelText: 'Enter Code',
+              ),
+            ),
+          ),
+          Expanded(
+            child: BottomButton(
+              buttonTitle: 'Register',
+              tapping: () {
+                SharedData data = SharedData(
+                  cCode: countrycode,
+                );
+                _auth.currentUser().then((user) {
+                  if (user != null) {
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => UserProfile(
+                          data,
+                        ),
+                      ),
+                    );
+                  } else {
+                    signIn();
+                  }
+                });
+              },
+            ),
+          ),
         ],
       ),
     );

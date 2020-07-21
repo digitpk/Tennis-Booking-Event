@@ -25,7 +25,7 @@ class _SplashScreenState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 5,
+      seconds: 10,
       navigateAfterSeconds: MainScreen.id,
       title: Text(
         'Tennis Event Registration',
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<Splash> {
   }
 
   void startTimer() {
-    Timer(Duration(seconds: 3), () {
+    Timer(Duration(seconds: 5), () {
       navigateUser(); //It will redirect  after 3 seconds
     });
   }

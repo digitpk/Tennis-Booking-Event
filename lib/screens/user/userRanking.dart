@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tennis_event/utilities/boxes.dart';
 import 'package:tennis_event/utilities/constants.dart';
 import 'package:tennis_event/utilities/styles.dart';
-import 'package:tennis_event/widgets/bottomMenuBar.dart';
 import 'package:tennis_event/widgets/userRanking.dart';
 
 class UserRanking extends StatefulWidget {
@@ -31,9 +30,6 @@ class _RankingState extends State<UserRanking> {
           'Ranking',
           style: kAppbarStyle,
         ),
-      ),
-      bottomNavigationBar: BottomMenuBar(
-        selectedIndex: _selectedIndex,
       ),
       body: Column(
         children: [
