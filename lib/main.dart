@@ -27,7 +27,6 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _selectedIndex = 1;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

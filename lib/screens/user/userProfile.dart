@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_event/screens/settings.dart';
 import 'package:tennis_event/utilities/constants.dart';
-import 'package:tennis_event/utilities/sharedData.dart';
 import 'package:tennis_event/utilities/styles.dart';
 import 'package:tennis_event/widgets/bottomButton.dart';
 import 'package:tennis_event/widgets/bottomMenuBar.dart';
@@ -12,7 +11,11 @@ import 'package:tennis_event/widgets/newGameField.dart';
 class UserProfile extends StatefulWidget {
   static const String id = 'user_profile_screen';
 
-  UserProfile(SharedData data);
+  final String cCode;
+  final String phoneNumber;
+
+  UserProfile({this.cCode, this.phoneNumber});
+
   @override
   _UserProfileState createState() => _UserProfileState();
 }
@@ -22,7 +25,6 @@ class _UserProfileState extends State<UserProfile> {
   String myYob = 'Choose Year of Birth';
   String myLevel = 'Choose Play Level';
   String side = 'Choose Side';
-  SharedData myCountry;
   String username;
   TextEditingController _controller1, _controller2;
 
@@ -101,10 +103,8 @@ class _UserProfileState extends State<UserProfile> {
                       isShowTitle: true,
                       isDownIcon: true,
                       showEnglishName: true,
-                      onChanged: (value) {
-                        setState(() {
-                          myCountry.cCode;
-                        });
+                      onChanged: (CountryCode code) {
+                        code = widget.cCode as CountryCode;
                       },
                     ),
                   ],
@@ -265,6 +265,9 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
             NewGFields(
+              onchange: () {
+                widget.phoneNumber;
+              },
               controller: _controller2,
               labelText: 'Phone Number',
             ),

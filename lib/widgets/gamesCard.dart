@@ -9,12 +9,18 @@ class UserGamesCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           const ListTile(
-            leading: CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.transparent,
-              backgroundImage: AssetImage(
+//            leading: CircleAvatar(
+//              radius: 15,
+//              backgroundColor: Colors.transparent,
+//              backgroundImage: AssetImage(
+//                'assets/icons/racket_icon.png',
+//
+//              ),
+            leading: ImageIcon(
+              AssetImage(
                 'assets/icons/racket_icon.png',
               ),
+              size: 30,
             ),
             title: Text(
               'Participants:',

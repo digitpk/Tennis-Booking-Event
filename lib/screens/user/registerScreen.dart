@@ -25,6 +25,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String errorMessage = '';
   FirebaseAuth _auth = FirebaseAuth.instance;
 
+  final _text = TextEditingController();
+  final _code = TextEditingController();
+  bool _validate = false;
+
+  @override
+  void dispose() {
+    _text.dispose();
+    _code.dispose();
+    super.dispose();
+  }
+
   Future<void> verifyPhone() async {
     final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
       this.verificationId = verId;
@@ -64,6 +75,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 85,
               child: Column(children: [
                 TextField(
+                  controller: _code,
+                  decoration: InputDecoration(
+                    errorText: _validate ? 'Value Can\'t Be Empty' : null,
+                  ),
                   onChanged: (value) {
                     this.smsOTP = value;
                   },
@@ -81,8 +96,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               FlatButton(
                 child: Text('Register'),
                 onPressed: () {
-                  SharedData data = SharedData(
-                    cCode: countrycode,
+                  SharedUserData userdata = SharedUserData(
+                    countCode: countrycode,
+                    phoneNumbers: phonenumber,
                   );
                   _auth.currentUser().then((user) {
                     if (user != null) {
@@ -90,7 +106,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserProfile(data),
+                          builder: (context) => UserProfile(
+                            cCode: userdata.countCode,
+                            phoneNumber: userdata.phoneNumbers,
+                          ),
                         ),
                       );
                     } else {
@@ -219,7 +238,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: Padding(
                           padding: EdgeInsets.all(10),
                           child: TextField(
+                            controller: _text,
                             decoration: InputDecoration(
+                              errorText:
+                                  _validate ? 'Value Can\'t Be Empty' : null,
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: const BorderRadius.all(
                                   const Radius.circular(10.0),
@@ -297,9 +319,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: BottomButton(
               buttonTitle: 'Register',
               tapping: () {
-                SharedData data = SharedData(
-                  cCode: countrycode,
+                SharedUserData userdata = SharedUserData(
+                  countCode: countrycode,
+                  phoneNumbers: phonenumber,
                 );
+
                 _auth.currentUser().then((user) {
                   if (user != null) {
                     Navigator.of(context).pop();
@@ -307,13 +331,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => UserProfile(
-                          data,
+                          cCode: userdata.countCode,
+                          phoneNumber: userdata.phoneNumbers,
                         ),
                       ),
                     );
                   } else {
                     signIn();
                   }
+                });
+
+                setState(() {
+                  _text.text.isEmpty ? _validate = true : _validate = false;
                 });
               },
             ),

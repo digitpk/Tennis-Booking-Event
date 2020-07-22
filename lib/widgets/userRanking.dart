@@ -46,6 +46,9 @@ class _UserRankingWidgetState extends State<UserRankingWidget> {
                     color: kDividerLineGray,
                   ),
                 ),
+                SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: [
                     CircleAvatar(

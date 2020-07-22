@@ -230,6 +230,27 @@ class _JoinGameState extends State<JoinGame> {
                 ],
               ),
             ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(25.0),
+                      child: Text(
+                        'The Game is yet to be created by the user and the basic game layout should be like the above tile.',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 15,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

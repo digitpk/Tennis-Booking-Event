@@ -35,14 +35,27 @@ class _RankingState extends State<UserRanking> {
         children: [
           UserRankingWidget(),
           DividerLine(),
-          UserRankingWidget(),
-          DividerLine(),
-          UserRankingWidget(),
-          DividerLine(),
-          UserRankingWidget(),
-          DividerLine(),
-          UserRankingWidget(),
-          DividerLine(),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Text(
+                      'The Game is yet to be created by the user and the basic game layout should be like the above tile & fetched from DB.',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 15,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

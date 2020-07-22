@@ -1,5 +1,6 @@
-class SharedData {
-  final String cCode;
+class SharedUserData {
+  final String countCode;
+  final String phoneNumbers;
 
-  SharedData({this.cCode});
+  SharedUserData({this.countCode, this.phoneNumbers});
 }
