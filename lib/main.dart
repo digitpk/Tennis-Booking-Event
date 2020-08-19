@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 //      home: Splash(),
-      initialRoute: Splash.id,
+      initialRoute: TournamentDrawgame.id,
       routes: {
         AllScreens.id: (context) => AllScreens(),
         Splash.id: (context) => Splash(),
